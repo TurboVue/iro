@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
+  '@onesignal/onesignal-vue3': ^1.0.2
   '@vitejs/plugin-vue': ^1.9.2
   '@vue/compiler-sfc': ^3.2.4
   comlink: ^4.3.1
@@ -17,6 +18,7 @@ specifiers:
   workbox-window: ^6.5.3
 
 dependencies:
+  '@onesignal/onesignal-vue3': 1.0.2
   comlink: 4.3.1
   matercolors: 2.3.0
   notyf: 3.10.0
@@ -1329,6 +1331,12 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@onesignal/onesignal-vue3/1.0.2:
+    resolution: {integrity: sha512-vII2s7/e8veseex0hKWJHbVZDkFTh/WO76DfVvrAq0IJKv9c216TXDp3Xs6WDRQoODgPhpvI3TnHq8i1E2u+Vw==}
+    dependencies:
+      vue: 3.2.37
+    dev: false
 
   /@rollup/plugin-babel/5.3.1_zlefvkjd3mp2eij3mw2gs4aqfm:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
