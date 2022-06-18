@@ -7,6 +7,7 @@ import VueI18n from "@intlify/vite-plugin-vue-i18n";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   resolve: {
     alias: {
       "@src": resolve(__dirname, "src"),
