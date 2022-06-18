@@ -14,6 +14,7 @@ specifiers:
   vue: ^3.2.4
   vue-i18n: ^9.1.7
   vue-router: ^4.0.8
+  workbox-window: ^6.5.3
 
 dependencies:
   comlink: 4.3.1
@@ -31,6 +32,7 @@ devDependencies:
   sass: 1.52.3
   vite: 2.9.12_sass@1.52.3
   vite-plugin-pwa: 0.8.2_vite@2.9.12
+  workbox-window: 6.5.3
 
 packages:
 
