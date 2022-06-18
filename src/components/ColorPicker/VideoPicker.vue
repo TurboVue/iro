@@ -28,8 +28,6 @@
     <div class="video-wrapper--control">
       <div
         class="video-control--torch icon icon-tunder--white"
-        :class="{ disabled: !isTorchAvailable }"
-        :disabled="!isTorchAvailable"
         @click="onToggleTorch"
       ></div>
       <div
@@ -41,8 +39,6 @@
       </div>
       <div
         class="video-control--switch icon icon-switch--white"
-        :class="{ disabled: !isSwitchAvailable }"
-        :disabled="!isSwitchAvailable"
         @click="onSwitchCamera"
       ></div>
     </div>
@@ -121,7 +117,7 @@ export default {
         },
       };
 
-      if (facingMode && this.isSwitchAvailable) {
+      if (facingMode) {
         constraints.video.facingMode = facingMode;
       }
 
@@ -235,16 +231,14 @@ export default {
       const stream = video.srcObject;
       const [track] = stream.getVideoTracks();
 
-      if (this.isSwitchAvailable) {
-        const facingMode =
+      const facingMode =
           track.getSettings().facingMode === "user" ? "environment" : "user";
 
-        track.stop();
+      track.stop();
 
-        this.initializeCamera(facingMode).catch((e) => {
-          this.notyf.error(this.t("notyf.error_general"));
-        });
-      }
+      this.initializeCamera(facingMode).catch((e) => {
+        this.notyf.error(this.t("notyf.error_general"));
+      });
     },
     onToggleTorch() {
       const video = this.$refs.video_ctx;
@@ -252,8 +246,7 @@ export default {
       const stream = video.srcObject;
       const [track] = stream.getVideoTracks();
 
-      if (this.isTorchAvailable) {
-        track
+      track
           .applyConstraints({
             advanced: [{ torch: !this.isTorch }],
           })
@@ -265,7 +258,6 @@ export default {
           .catch((e) => {
             this.notyf.error(this.t("notyf.torch_error"));
           });
-      }
     },
     stopInterval() {
       if (this.interval) {
