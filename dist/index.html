@@ -20,7 +20,24 @@
   <title>IRO - Amazing Color Tools</title>
 
   <style>body{background-color: #212121;}</style>
-  <script type="module" crossorigin src="./assets/index.59158405.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+
+        //Another way to initialize OneSignal
+        window.OneSignal = window.OneSignal || [];
+
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "a1ef5439-43f2-453e-8200-fc5400a92e92",
+                // Your other init settings
+            });
+            OneSignal.showSlidedownPrompt();
+            OneSignal.on('permissionPromptDisplay', function () {
+                console.log("The prompt displayed");
+            });
+        });
+    </script>
+  <script type="module" crossorigin src="./assets/index.299651c2.js"></script>
   <link rel="stylesheet" href="./assets/index.5557a681.css">
 <link rel="manifest" href="./manifest.webmanifest"></head>
 
