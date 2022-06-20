@@ -1,53 +1,56 @@
 <template>
-  <div v-if="offlineReady || needRefresh" class="pwa-toast" role="alert">
-    <div class="pwa-toast--offline" v-if="offlineReady">
-      <i class="icon icon-offline"></i>
-      <span v-t="'pwa.offline_ready'"></span>
-    </div>
-
+  <div v-if="!offlineReady || needRefresh" class="pwa-toast" role="alert">
     <div class="pwa-toast--update" v-if="needRefresh">
       <i class="icon icon-loading"></i>
-      <span v-t="'pwa.update_ready'"></span>
+      <a v-t="'pwa.update_ready'" style="cursor: pointer" @click="onUpdate"></a>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import {watch} from 'vue';
 import {useI18n} from "vue-i18n";
 
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
-export default {
-  name: "ReloadPrompt",
-  setup() {
-    const { t } = useI18n();
-    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
+const { t } = useI18n();
 
-    const watcherStop = watch([ offlineReady, needRefresh ], (now, prev) => {
-      const [ offlineNow, refreshNow ] = now;
-      const [ offlinePrev, refreshPrev ] = prev;
-      if (offlineNow === true && offlinePrev === false) {
-        setTimeout(() => {
-          offlineReady.value = false;
-          watcherStop();
-        }, 3000);
-      } else if (refreshNow === true && refreshPrev === false) {
-        setTimeout(() => {
-          needRefresh.value = false;
-          updateServiceWorker();
-          watcherStop();
-        }, 3000);
-      }
-    });
+// replaced dyanmicaly
+const reloadSW = import.meta.env.PROD
 
-    return {
-      t,
-      offlineReady,
-      needRefresh
+const {
+  offlineReady,
+  needRefresh,
+  updateServiceWorker,
+} = useRegisterSW({
+  immediate: true,
+  onRegistered(r) {
+    if (reloadSW) {
+      r && setInterval(async() => {
+        // eslint-disable-next-line no-console
+        // console.log('Checking for sw update')
+        await r.update()
+      }, 20000 /* 20s for testing purposes */)
     }
-  }
-};
+    else {
+      // eslint-disable-next-line no-console
+      console.log(`SW Registered: ${r}`)
+    }
+  },
+})
+
+const close = async() => {
+  offlineReady.value = false
+  needRefresh.value = false
+}
+const onUpdate = () => {
+  navigator.serviceWorker.getRegistration('/prompt-sw.js').then((registration) => {
+    if (registration?.waiting?.state === 'installed')
+      updateServiceWorker(true)
+    else
+      window.location.reload()
+  })
+}
 </script>
 
 <style lang="scss">

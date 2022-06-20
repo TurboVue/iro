@@ -15,6 +15,9 @@ specifiers:
   vue: ^3.2.4
   vue-i18n: ^9.1.7
   vue-router: ^4.0.8
+  workbox-core: ^6.5.3
+  workbox-precaching: ^6.5.3
+  workbox-routing: ^6.5.3
   workbox-window: ^6.5.3
 
 dependencies:
@@ -34,6 +37,9 @@ devDependencies:
   sass: 1.52.3
   vite: 2.9.12_sass@1.52.3
   vite-plugin-pwa: 0.8.2_vite@2.9.12
+  workbox-core: 6.5.3
+  workbox-precaching: 6.5.3
+  workbox-routing: 6.5.3
   workbox-window: 6.5.3
 
 packages:

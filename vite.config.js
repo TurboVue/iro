@@ -25,7 +25,13 @@ export default defineConfig({
         name: "IRO - Amazing Color Tools",
         short_name: "IRO",
         theme_color: "#212121",
-        registerType: "autoUpdate",
+        // registerType: "autoUpdate",
+        filename: 'claims-sw.js',
+        strategies: 'injectManifest',
+        injectManifest: {
+          globPatterns: ['**/*'],
+          maximumFileSizeToCacheInBytes: 100 * 1024 * 1024,
+        },
         includeAssets: ["/favicon.ico"],
         icons: [
           {
@@ -47,6 +53,12 @@ export default defineConfig({
             purpose: "any maskable"
           },
         ],
+        devOptions: {
+          enabled: true,
+          /* when using generateSW the PWA plugin will switch to classic */
+          type: 'module',
+          navigateFallback: 'index.html',
+        },
       },
     }),
   ],

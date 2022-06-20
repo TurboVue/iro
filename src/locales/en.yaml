@@ -58,4 +58,4 @@ notyf:
     function normally.
 pwa:
   offline_ready: Offline Mode Ready
-  update_ready: Working Auto Update
+  update_ready: Click to Manual Update
