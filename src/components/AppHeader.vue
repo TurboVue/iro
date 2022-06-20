@@ -10,18 +10,7 @@
 
         <router-link :to="{ name: 'convert' }" active-class="active" exact v-t="'navbar.convert'"></router-link>
         <router-link :to="{ name: 'picker' }" active-class="active" exact v-t="'navbar.picker'"></router-link>
-
-        <a href="https://github.com/nyancodeid/iro" target="_blank" rel="noopener">Github</a>
-
-        <select class="select-locale" v-model="locale" :title="t('tooltip.select_lang')">
-          <option value="en">🇺🇸 EN</option>
-          <option value="id">🇮🇩 ID</option>
-        </select>
       </nav>
-      <div
-        class="icon icon-lg"
-        :class="`icon-theme-indicator--${contrast}`"
-      ></div>
     </div>
   </header>
 </template>

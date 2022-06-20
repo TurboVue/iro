@@ -19,8 +19,10 @@ app
   .use(i18n)
   .use(router)
     .use(OneSignalVuePlugin, {
-        appId: '0e2742c8-4370-4441-88f7-8a172a5baa5a',
-        allowLocalhostAsSecureOrigin: true
+        appId: 'a1ef5439-43f2-453e-8200-fc5400a92e92',
+        // appId: 'c7083d7c-fb82-4711-a01f-81efe58f727e',
+        allowLocalhostAsSecureOrigin: true,
+        persistNotification: true,
     })
 
 if (isRunningOnPWA()) window.resizeTo(400, 800);
