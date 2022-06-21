@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!offlineReady || needRefresh" class="pwa-toast" role="alert">
+  <div v-if="needRefresh" class="pwa-toast" role="alert">
     <div class="pwa-toast--update" v-if="needRefresh">
       <i class="icon icon-loading"></i>
       <a v-t="'pwa.update_ready'" style="cursor: pointer" @click="onUpdate"></a>
@@ -17,7 +17,6 @@ const { t } = useI18n();
 
 // replaced dyanmicaly
 const reloadSW = import.meta.env.PROD
-
 const {
   offlineReady,
   needRefresh,
@@ -28,7 +27,7 @@ const {
     if (reloadSW) {
       r && setInterval(async() => {
         // eslint-disable-next-line no-console
-        // console.log('Checking for sw update')
+        console.log('Checking for sw update')
         await r.update()
       }, 20000 /* 20s for testing purposes */)
     }
@@ -38,17 +37,13 @@ const {
     }
   },
 })
-
-const close = async() => {
-  offlineReady.value = false
-  needRefresh.value = false
-}
 const onUpdate = () => {
   navigator.serviceWorker.getRegistration('/prompt-sw.js').then((registration) => {
     if (registration?.waiting?.state === 'installed')
       updateServiceWorker(true)
     else
       window.location.reload()
+
   })
 }
 </script>
